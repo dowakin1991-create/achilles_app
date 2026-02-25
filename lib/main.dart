@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart'; // Хмара розблокована
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart'; // Підключили твої ключі
 import 'screens/main_menu.dart';
 
 void main() async {
-  // Цей рядок обов'язковий, він гарантує, що графіка завантажиться 
-  // лише після того, як хмара буде готова
+  // Гарантуємо, що віджети завантажаться
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Ініціалізуємо Firebase (згодом сюди додадуться ключі безпеки)
-  // await Firebase.initializeApp(); // Поки що закоментовано для безпеки на GitHub
+  // Ініціалізуємо хмару з твоїми ключами Achilles
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   
   runApp(const AchillesApp());
 }
