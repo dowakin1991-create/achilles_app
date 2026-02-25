@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart'; // Підключили твої ключі
-import 'screens/main_menu.dart';
+import 'firebase_options.dart';
+import 'screens/auth_screen.dart'; // Тепер імпортуємо екран авторизації
 
 void main() async {
-  // Гарантуємо, що віджети завантажаться
+  // Гарантуємо, що віджети завантажаться перед підключенням до мережі
   WidgetsFlutterBinding.ensureInitialized();
   
   // Ініціалізуємо хмару з твоїми ключами Achilles
@@ -23,14 +23,15 @@ class AchillesApp extends StatelessWidget {
     return MaterialApp(
       title: 'Achilles',
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system, 
+      themeMode: ThemeMode.system, // Автоматичне перемикання теми
       darkTheme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: const Color(0xFF121212),
       ),
       theme: ThemeData.light().copyWith(
         scaffoldBackgroundColor: const Color(0xFFF5F5F7),
       ),
-      home: const MainMenuScreen(),
+      // Стартова сторінка - завжди екран входу
+      home: const AuthScreen(), 
     );
   }
 }
