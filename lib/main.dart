@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-// import 'package:firebase_core/firebase_core.dart'; // Розблокуємо, коли додамо пакети
+import 'package:firebase_core/firebase_core.dart'; // Хмара розблокована
 import 'screens/main_menu.dart';
 
 void main() async {
+  // Цей рядок обов'язковий, він гарантує, що графіка завантажиться 
+  // лише після того, як хмара буде готова
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(); // Ініціалізація нашої хмари
+  
+  // Ініціалізуємо Firebase (згодом сюди додадуться ключі безпеки)
+  // await Firebase.initializeApp(); // Поки що закоментовано для безпеки на GitHub
+  
   runApp(const AchillesApp());
 }
 
@@ -16,7 +21,7 @@ class AchillesApp extends StatelessWidget {
     return MaterialApp(
       title: 'Achilles',
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system, // Адаптивна тема за замовчуванням
+      themeMode: ThemeMode.system, 
       darkTheme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: const Color(0xFF121212),
       ),
