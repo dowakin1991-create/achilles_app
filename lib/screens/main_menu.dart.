@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'settings_screen.dart';
 import 'food_diary_screen.dart';
 import 'profile_screen.dart';
-import 'activity_screen.dart'; // Підключили екран активності
+import 'activity_screen.dart';
+import 'exercises_screen.dart'; // Підключили базу вправ
 
 class MainMenuScreen extends StatelessWidget {
   const MainMenuScreen({super.key});
@@ -50,44 +51,34 @@ class MainMenuScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   
-                  // Всі кнопки меню Achilles
+                  // ПОВНИЙ СПИСОК МОДУЛІВ
                   _buildGlassMenuCard(
-                    context: context,
-                    icon: Icons.person_outline,
-                    title: 'Мій профіль',
-                    isDark: isDark,
+                    context: context, icon: Icons.person_outline, title: 'Мій профіль', isDark: isDark,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen())), 
                   ),
                   const SizedBox(height: 16),
                   _buildGlassMenuCard(
-                    context: context,
-                    icon: Icons.local_fire_department,
-                    title: 'Моя Активність',
-                    isDark: isDark,
+                    context: context, icon: Icons.local_fire_department, title: 'Моя Активність', isDark: isDark,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityScreen())), 
                   ),
                   const SizedBox(height: 16),
                   _buildGlassMenuCard(
-                    context: context,
-                    icon: Icons.restaurant_menu,
-                    title: 'Щоденник їжі',
-                    isDark: isDark,
+                    context: context, icon: Icons.restaurant_menu, title: 'Щоденник їжі', isDark: isDark,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const FoodDiaryScreen())), 
                   ),
                   const SizedBox(height: 16),
                   _buildGlassMenuCard(
-                    context: context,
-                    icon: Icons.settings_outlined,
-                    title: 'Налаштування',
-                    isDark: isDark,
+                    context: context, icon: Icons.fitness_center, title: 'База вправ', isDark: isDark,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ExercisesScreen())), 
+                  ),
+                  const SizedBox(height: 16),
+                  _buildGlassMenuCard(
+                    context: context, icon: Icons.settings_outlined, title: 'Налаштування', isDark: isDark,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen())), 
                   ),
                   const SizedBox(height: 16),
                   _buildGlassMenuCard(
-                    context: context,
-                    icon: Icons.info_outline,
-                    title: 'Про Achilles',
-                    isDark: isDark,
+                    context: context, icon: Icons.info_outline, title: 'Про Achilles', isDark: isDark,
                     onTap: () => _showAboutDialog(context, isDark),
                   ),
                   const SizedBox(height: 20),
@@ -100,9 +91,7 @@ class MainMenuScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildGlassMenuCard({
-    required BuildContext context, required IconData icon, required String title, required bool isDark, required VoidCallback onTap,
-  }) {
+  Widget _buildGlassMenuCard({required BuildContext context, required IconData icon, required String title, required bool isDark, required VoidCallback onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: ClipRRect(
@@ -150,35 +139,22 @@ class MainMenuScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                _buildInfoRow('🎯', 'Місія', 'Допомогти тобі стати легендою, а не просто влізти в ті старі джинси. Боги Олімпу заздритимуть твоїй дисципліні.', isDark),
-                const SizedBox(height: 16),
-                _buildInfoRow('🔥', 'Розрахунок', 'Точні алгоритми. Ми знаємо про ту цукерку "до кави", тож краще записуй все чесно.', isDark),
-                const SizedBox(height: 16),
-                _buildInfoRow('🥗', 'Харчування', 'Гречка — це сила, але ми підберемо рецепти, щоб ти не зненавидів їжу на шляху до цілі.', isDark),
-                const SizedBox(height: 16),
-                _buildInfoRow('📊', 'Синхронізація', 'Інтеграція з годинниками. Ти спиш — ми аналізуємо. Ти біжиш — ми рахуємо.', isDark),
+                Text('🎯 Місія', style: TextStyle(fontWeight: FontWeight.bold, color: isDark ? Colors.white : Colors.black)),
+                Text('Стати легендою, а не просто влізти в джинси.', style: TextStyle(color: isDark ? Colors.white70 : Colors.black87)),
+                const SizedBox(height: 8),
+                Text('🔥 Розрахунок', style: TextStyle(fontWeight: FontWeight.bold, color: isDark ? Colors.white : Colors.black)),
+                Text('Ми знаємо про ту цукерку "до кави".', style: TextStyle(color: isDark ? Colors.white70 : Colors.black87)),
               ],
             ),
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('Зрозуміло, до бою!', style: TextStyle(color: isDark ? const Color(0xFFFFD700) : const Color(0xFFB8860B))),
+              child: Text('До бою!', style: TextStyle(color: isDark ? const Color(0xFFFFD700) : const Color(0xFFB8860B))),
             ),
           ],
         );
       },
-    );
-  }
-
-  Widget _buildInfoRow(String emoji, String title, String text, bool isDark) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('$emoji $title', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: isDark ? Colors.white : Colors.black)),
-        const SizedBox(height: 4),
-        Text(text, style: TextStyle(fontSize: 14, color: isDark ? Colors.white70 : Colors.black87)),
-      ],
     );
   }
 }
