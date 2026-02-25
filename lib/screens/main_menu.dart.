@@ -1,25 +1,25 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'settings_screen.dart'; // Підключили наш новий екран налаштувань
+import 'settings_screen.dart';
+import 'food_diary_screen.dart';
+import 'profile_screen.dart'; // Підключили екран профілю
 
 class MainMenuScreen extends StatelessWidget {
   const MainMenuScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Визначаємо, чи зараз темна тема на пристрої, щоб адаптувати скло
     bool isDark = Theme.of(context).brightness == Brightness.dark;
     
     return Scaffold(
       body: Stack(
         children: [
-          // Градієнт для гарного ефекту скла
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: isDark 
-                    ? [Colors.black, const Color(0xFF1A1A00)] // Темно-золотий відтінок
-                    : [Colors.white, const Color(0xFFFFF9E6)], // Світло-золотий відтінок
+                    ? [Colors.black, const Color(0xFF1A1A00)] 
+                    : [Colors.white, const Color(0xFFFFF9E6)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -27,12 +27,12 @@ class MainMenuScreen extends StatelessWidget {
           ),
           
           SafeArea(
-            child: Padding(
+            child: SingleChildScrollView(
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 20),
                   Text(
                     'ACHILLES',
                     style: TextStyle(
@@ -45,21 +45,28 @@ class MainMenuScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   Text(
                     'Стань легендою.',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: isDark ? Colors.white70 : Colors.black54,
-                    ),
+                    style: TextStyle(fontSize: 18, color: isDark ? Colors.white70 : Colors.black54),
                   ),
-                  const SizedBox(height: 60),
+                  const SizedBox(height: 40),
                   
                   // Кнопки меню
                   _buildGlassMenuCard(
                     context: context,
-                    icon: Icons.monitor_weight_outlined,
-                    title: 'Мій прогрес',
+                    icon: Icons.person_outline,
+                    title: 'Мій профіль',
                     isDark: isDark,
                     onTap: () {
-                      // Тут буде перехід на екран прогресу
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
+                    }, 
+                  ),
+                  const SizedBox(height: 16),
+                  _buildGlassMenuCard(
+                    context: context,
+                    icon: Icons.restaurant_menu,
+                    title: 'Щоденник їжі',
+                    isDark: isDark,
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const FoodDiaryScreen()));
                     }, 
                   ),
                   const SizedBox(height: 16),
@@ -69,11 +76,7 @@ class MainMenuScreen extends StatelessWidget {
                     title: 'Налаштування',
                     isDark: isDark,
                     onTap: () {
-                      // Робочий перехід на екран налаштувань
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const SettingsScreen()),
-                      );
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen()));
                     }, 
                   ),
                   const SizedBox(height: 16),
@@ -93,13 +96,8 @@ class MainMenuScreen extends StatelessWidget {
     );
   }
 
-  // Віджет для ефекту "Рідкого скла"
   Widget _buildGlassMenuCard({
-    required BuildContext context,
-    required IconData icon,
-    required String title,
-    required bool isDark,
-    required VoidCallback onTap,
+    required BuildContext context, required IconData icon, required String title, required bool isDark, required VoidCallback onTap,
   }) {
     return GestureDetector(
       onTap: onTap,
@@ -112,23 +110,13 @@ class MainMenuScreen extends StatelessWidget {
             decoration: BoxDecoration(
               color: isDark ? Colors.white.withOpacity(0.05) : Colors.white.withOpacity(0.4),
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(
-                color: isDark ? Colors.white.withOpacity(0.1) : Colors.white.withOpacity(0.5),
-                width: 1.5,
-              ),
+              border: Border.all(color: isDark ? Colors.white.withOpacity(0.1) : Colors.white.withOpacity(0.5), width: 1.5),
             ),
             child: Row(
               children: [
                 Icon(icon, size: 28, color: isDark ? Colors.white : Colors.black87),
                 const SizedBox(width: 20),
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    color: isDark ? Colors.white : Colors.black87,
-                  ),
-                ),
+                Text(title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: isDark ? Colors.white : Colors.black87)),
                 const Spacer(),
                 Icon(Icons.arrow_forward_ios, size: 18, color: isDark ? Colors.white54 : Colors.black54),
               ],
@@ -139,7 +127,6 @@ class MainMenuScreen extends StatelessWidget {
     );
   }
 
-  // Спливаюче вікно "Про додаток"
   void _showAboutDialog(BuildContext context, bool isDark) {
     showDialog(
       context: context,
