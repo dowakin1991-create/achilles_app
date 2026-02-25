@@ -4,7 +4,8 @@ import 'settings_screen.dart';
 import 'food_diary_screen.dart';
 import 'profile_screen.dart';
 import 'activity_screen.dart';
-import 'exercises_screen.dart'; // Підключили базу вправ
+import 'exercises_screen.dart';
+import 'ai_scanner_screen.dart'; // Підключили ШІ Сканер
 
 class MainMenuScreen extends StatelessWidget {
   const MainMenuScreen({super.key});
@@ -16,6 +17,7 @@ class MainMenuScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+          // Фірмовий фон Achilles
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -51,34 +53,67 @@ class MainMenuScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   
-                  // ПОВНИЙ СПИСОК МОДУЛІВ
+                  // ПОВНИЙ СПИСОК МОДУЛІВ ДОДАТКУ
                   _buildGlassMenuCard(
-                    context: context, icon: Icons.person_outline, title: 'Мій профіль', isDark: isDark,
+                    context: context, 
+                    icon: Icons.person_outline, 
+                    title: 'Мій профіль', 
+                    isDark: isDark,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen())), 
                   ),
                   const SizedBox(height: 16),
+                  
+                  // НОВИЙ МОДУЛЬ: ШІ Аналіз
                   _buildGlassMenuCard(
-                    context: context, icon: Icons.local_fire_department, title: 'Моя Активність', isDark: isDark,
+                    context: context, 
+                    icon: Icons.document_scanner, 
+                    title: 'ШІ Аналіз фігури', 
+                    isDark: isDark,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AiScannerScreen())), 
+                  ),
+                  const SizedBox(height: 16),
+
+                  _buildGlassMenuCard(
+                    context: context, 
+                    icon: Icons.local_fire_department, 
+                    title: 'Моя Активність', 
+                    isDark: isDark,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityScreen())), 
                   ),
                   const SizedBox(height: 16),
+
                   _buildGlassMenuCard(
-                    context: context, icon: Icons.restaurant_menu, title: 'Щоденник їжі', isDark: isDark,
+                    context: context, 
+                    icon: Icons.restaurant_menu, 
+                    title: 'Щоденник їжі', 
+                    isDark: isDark,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const FoodDiaryScreen())), 
                   ),
                   const SizedBox(height: 16),
+
                   _buildGlassMenuCard(
-                    context: context, icon: Icons.fitness_center, title: 'База вправ', isDark: isDark,
+                    context: context, 
+                    icon: Icons.fitness_center, 
+                    title: 'База вправ', 
+                    isDark: isDark,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ExercisesScreen())), 
                   ),
                   const SizedBox(height: 16),
+
                   _buildGlassMenuCard(
-                    context: context, icon: Icons.settings_outlined, title: 'Налаштування', isDark: isDark,
+                    context: context, 
+                    icon: Icons.settings_outlined, 
+                    title: 'Налаштування', 
+                    isDark: isDark,
                     onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen())), 
                   ),
                   const SizedBox(height: 16),
+
                   _buildGlassMenuCard(
-                    context: context, icon: Icons.info_outline, title: 'Про Achilles', isDark: isDark,
+                    context: context, 
+                    icon: Icons.info_outline, 
+                    title: 'Про Achilles', 
+                    isDark: isDark,
                     onTap: () => _showAboutDialog(context, isDark),
                   ),
                   const SizedBox(height: 20),
@@ -91,6 +126,7 @@ class MainMenuScreen extends StatelessWidget {
     );
   }
 
+  // Віджет для скляних кнопок меню
   Widget _buildGlassMenuCard({required BuildContext context, required IconData icon, required String title, required bool isDark, required VoidCallback onTap}) {
     return GestureDetector(
       onTap: onTap,
@@ -120,6 +156,7 @@ class MainMenuScreen extends StatelessWidget {
     );
   }
 
+  // Спливаюче вікно "Про додаток"
   void _showAboutDialog(BuildContext context, bool isDark) {
     showDialog(
       context: context,
