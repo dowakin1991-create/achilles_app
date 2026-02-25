@@ -1,0 +1,20 @@
+name: achilles_app
+description: Achilles - Fitness & Nutrition Tracker
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Підключаємо ядро хмари Firebase
+  firebase_core: ^2.24.2
+  # Підключаємо базу даних для збереження їжі та користувачів
+  cloud_firestore: ^4.13.6
+  # Підключаємо авторизацію (щоб кожен мав свій захищений паролем профіль)
+  firebase_auth: ^4.15.3
+
+flutter:
+  uses-material-design: true
