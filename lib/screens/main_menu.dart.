@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'settings_screen.dart'; // Підключили наш новий екран налаштувань
 
 class MainMenuScreen extends StatelessWidget {
   const MainMenuScreen({super.key});
@@ -12,8 +13,7 @@ class MainMenuScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          // Тут в майбутньому може бути красивий абстрактний фон, 
-          // зараз ставимо градієнт для гарного ефекту скла
+          // Градієнт для гарного ефекту скла
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -33,7 +33,6 @@ class MainMenuScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 40),
-                  // Логотип (Текстовий плейсхолдер, поки не підключимо картинку)
                   Text(
                     'ACHILLES',
                     style: TextStyle(
@@ -59,7 +58,9 @@ class MainMenuScreen extends StatelessWidget {
                     icon: Icons.monitor_weight_outlined,
                     title: 'Мій прогрес',
                     isDark: isDark,
-                    onTap: () {}, // Додамо перехід пізніше
+                    onTap: () {
+                      // Тут буде перехід на екран прогресу
+                    }, 
                   ),
                   const SizedBox(height: 16),
                   _buildGlassMenuCard(
@@ -67,7 +68,13 @@ class MainMenuScreen extends StatelessWidget {
                     icon: Icons.settings_outlined,
                     title: 'Налаштування',
                     isDark: isDark,
-                    onTap: () {}, // Перехід в налаштування
+                    onTap: () {
+                      // Робочий перехід на екран налаштувань
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const SettingsScreen()),
+                      );
+                    }, 
                   ),
                   const SizedBox(height: 16),
                   _buildGlassMenuCard(
