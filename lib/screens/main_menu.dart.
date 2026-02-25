@@ -2,7 +2,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'settings_screen.dart';
 import 'food_diary_screen.dart';
-import 'profile_screen.dart'; // Підключили екран профілю
+import 'profile_screen.dart';
+import 'activity_screen.dart'; // Підключили екран активності
 
 class MainMenuScreen extends StatelessWidget {
   const MainMenuScreen({super.key});
@@ -49,15 +50,21 @@ class MainMenuScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   
-                  // Кнопки меню
+                  // Всі кнопки меню Achilles
                   _buildGlassMenuCard(
                     context: context,
                     icon: Icons.person_outline,
                     title: 'Мій профіль',
                     isDark: isDark,
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen()));
-                    }, 
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileScreen())), 
+                  ),
+                  const SizedBox(height: 16),
+                  _buildGlassMenuCard(
+                    context: context,
+                    icon: Icons.local_fire_department,
+                    title: 'Моя Активність',
+                    isDark: isDark,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const ActivityScreen())), 
                   ),
                   const SizedBox(height: 16),
                   _buildGlassMenuCard(
@@ -65,9 +72,7 @@ class MainMenuScreen extends StatelessWidget {
                     icon: Icons.restaurant_menu,
                     title: 'Щоденник їжі',
                     isDark: isDark,
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const FoodDiaryScreen()));
-                    }, 
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const FoodDiaryScreen())), 
                   ),
                   const SizedBox(height: 16),
                   _buildGlassMenuCard(
@@ -75,9 +80,7 @@ class MainMenuScreen extends StatelessWidget {
                     icon: Icons.settings_outlined,
                     title: 'Налаштування',
                     isDark: isDark,
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen()));
-                    }, 
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen())), 
                   ),
                   const SizedBox(height: 16),
                   _buildGlassMenuCard(
@@ -87,6 +90,7 @@ class MainMenuScreen extends StatelessWidget {
                     isDark: isDark,
                     onTap: () => _showAboutDialog(context, isDark),
                   ),
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
