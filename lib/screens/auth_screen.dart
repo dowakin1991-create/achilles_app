@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-// Firebase тимчасово вимкнено для тесту
-// import 'package:firebase_auth/firebase_auth.dart'; 
-import 'main_menu.dart'; 
+
+// ТУТ МИ ПРОПИСАЛИ АБСОЛЮТНИЙ ШЛЯХ (Залізобетонний варіант для Zapp)
+import 'package:achilles_app/screens/main_menu.dart'; 
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -25,7 +25,7 @@ class _AuthScreenState extends State<AuthScreen> {
     // Імітуємо завантаження (1 секунда)
     await Future.delayed(const Duration(seconds: 1));
       
-    // Пускаємо в головне меню без перевірки бази даних
+    // Пускаємо в головне меню
     if (mounted) {
       Navigator.pushReplacement(
         context,
