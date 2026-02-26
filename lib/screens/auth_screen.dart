@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
-// ТУТ МИ ПРОПИСАЛИ АБСОЛЮТНИЙ ШЛЯХ (Залізобетонний варіант для Zapp)
-import 'package:achilles_app/screens/main_menu.dart'; 
+// Надійний короткий шлях
+import 'main_menu.dart'; 
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -18,14 +18,12 @@ class _AuthScreenState extends State<AuthScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  // Спрощена функція для візуального тестування
   Future<void> _authenticate() async {
     setState(() => _isLoading = true);
     
-    // Імітуємо завантаження (1 секунда)
+    // Імітуємо завантаження
     await Future.delayed(const Duration(seconds: 1));
       
-    // Пускаємо в головне меню
     if (mounted) {
       Navigator.pushReplacement(
         context,
